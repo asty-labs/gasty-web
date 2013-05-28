@@ -11,9 +11,6 @@ class AppController {
 
     GroovyPagesTemplateEngine groovyPagesTemplateEngine
 
-    def index() {
-    }
-
     private String getUserAgent() {
         request.getHeader("user-agent").toLowerCase()
     }

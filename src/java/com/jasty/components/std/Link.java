@@ -1,4 +1,4 @@
-package com.jasty.components;
+package com.jasty.components.std;
 
 import com.jasty.core.Component;
 import com.jasty.core.InitProperty;

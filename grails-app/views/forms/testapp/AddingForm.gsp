@@ -4,10 +4,10 @@
 
 <hr/>
 
-<m:textBox id="text" />
+<jasty_std:textBox id="text" />
 <br/>
-<m:button onClick="okClicked" text="OK" />
-<m:button onClick="cancelClicked" text="Cancel" />
+<jasty_std:button onClick="okClicked" text="OK" />
+<jasty_std:button onClick="cancelClicked" text="Cancel" />
 
 
 

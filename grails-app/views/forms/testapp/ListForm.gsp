@@ -7,12 +7,12 @@
 
 <h1>Item list</h1>
 <hr/>
-<m:textBox id="searchText" />
-<m:button onClick="searchClicked" text="Search" />
+<jasty_std:textBox id="searchText" />
+<jasty_std:button onClick="searchClicked" text="Search" />
 <hr/>
 <div class="list" style="border: 1px solid black;width: 400px; height: 100px;overflow: auto;">
 </div>
-<m:button onClick="addClicked" text="Add..." />
+<jasty_std:button onClick="addClicked" text="Add..." />
 
 
 

@@ -164,143 +164,29 @@ jasty.Form = jasty.extend(jasty.Control, {
             }
 		};
         self.ajaxSubmit(props);
-	},
-
-    openModal: function(self, content, width) {
-        jasty.render(content, function(html) {
-            var div = $("<div/>");
-            $("body").append(div);
-            div.append(html);
-            var title = $(".FormTitle", div).text();
-            $(".FormTitle", div).remove();
-            div.dialog({
-                modal: true,
-                width: width,
-                title: title,
-                close: function() {
-                    div.remove();
-                }
-            });
-            div.parents(".ui-dialog").prepend($("<div/>").addClass("Background"));
-        });
-    },
-
-    close: function(self) {
-        self.parent("div.ui-dialog-content").dialog("close");
-    },
-
-    errors: function(self, errors) {
-        $(".errorContainer", self).errorMessage({});
-        $(".WithError", self).controlState({});
-        var globalErrors = "";
-        $.each(errors, function() {
-            if(this.name && $("#" + this.name).length) {
-                $("#" + this.name).controlState({errors:[this.message]});
-            }
-            else {
-                globalErrors += this.message + "\n";
-            }
-        });
-        if(globalErrors != "") {
-            if($(".errorContainer", self).length) {
-                $(".errorContainer", self).errorMessage({message: globalErrors});
-            }else
-                alert(globalErrors);
-        }
-    }
-
+	}
 });
 
-
-; (function($) {
-    $.fn.controlState = function(opts) {
-
-        function enableMarker(elem) {
-            var element = $(elem)
-            if (element.parents(".jasty-error-marker").length > 0)
-                return;
-            var messageText = "";
-            $.each(opts.errors, function() {
-                messageText += this + "\n";
-            });
-
-            jasty.replace(element, function() {
-                var table = $("<div/>").addClass("jasty-error-marker display-text");
-                var icon = $("<div/>").addClass("jasty-error-icon").appendTo(table);
-                $("<div/>").addClass("container").append($("<div/>").addClass("text").text(messageText)).appendTo(icon);
-                icon.click(function() {
-                    table.toggleClass("display-text");
-                });
-                element.detach()
-                element.addClass("WithError")
-                table.prepend(element)
-                return table
-            })
-
-        }
-
-        function disableMarker(elem) {
-            var element = $(elem)
-            if (element.parents(".jasty-error-marker").length == 0)
-                return;
-            var marker = $(element.parents(".jasty-error-marker")[0])
-
-            jasty.replace(marker, function() {
-                element.detach()
-                element.removeClass("WithError")
-                marker.remove()
-                return element
-            })
-        }
-
-        return this.each(
-            function() {
-                if (opts.errors && opts.errors.length > 0) {
-                    enableMarker(this);
-                }
-                else {
-                    disableMarker(this);
-                }
-            }
-        );
-    };
-})
-(jQuery);
-
-; (function($) {
-    $.fn.errorMessage = function(opts) {
-
-        return this.each(
-            function() {
-                if (opts.message) {
-                    if(!$(this).find(".closeBtn").length) {
-                        var $this = $(this);
-                        $(this).addClass("jasty-errorMessage");
-                        $("<div/>").addClass("message").appendTo(this);
-                        $("<div/>").addClass("closeBtn").click(function() {
-                            $this.hide();
-                        }).appendTo(this);
-                    }
-                    $(this).show();
-                    $(this).find(".message").text(opts.message);
-                }
-                else {
-                    $(this).hide();
-                }
-            }
-        );
-    };
-})
-    (jQuery);
-
-jasty.Page = {
-
-    reload: function() {
-        window.location.reload(true);
+jasty.JQuery = jasty.extend(jasty.Control, {
+    text: function(self, value) {
+        self.text(value);
     },
 
-    sessionTimeout: function(self, message) {
-        alert(message);
-        window.location.reload(true);
+    html: function(self, value) {
+        jasty.render(value, function(html) {
+            self.empty();
+            self.append(html);
+        });
+    },
+
+    append: function(self, content) {
+        jasty.render(content, function(html) {
+            self.append(html);
+        })
+    },
+
+    empty: function(self) {
+        self.empty();
     }
-}
+});
+

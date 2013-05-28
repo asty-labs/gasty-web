@@ -1,4 +1,4 @@
-package com.jasty.components;
+package com.jasty.components.std;
 
 import com.jasty.js.JsExpression;
 import com.jasty.js.JsList;

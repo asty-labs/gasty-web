@@ -22,12 +22,12 @@ public abstract class Form extends Component {
      * For subsequent requests the last used id should be tracked, to avoid name clashes.
      *
      */
-	private int lastAssignedChildId;
+    private int lastAssignedChildId;
 
     /**
      * FormEngine is injected on every request
      */
-	protected transient FormEngine formEngine;
+    protected transient FormEngine formEngine;
 
     /**
      * This flag is set, if the form is disposed (e.g. replaced by another one) and doesn't
@@ -59,19 +59,19 @@ public abstract class Form extends Component {
      * @param initialId to be adjusted
      * @return unique id
      */
-	private String globalizeId(String initialId) {
-		if(initialId == null)
-			initialId = "c" + lastAssignedChildId++;
-		return getClientId() + "." + initialId;
-	}
+    private String globalizeId(String initialId) {
+        if(initialId == null)
+            initialId = "c" + lastAssignedChildId++;
+        return getClientId() + "." + initialId;
+    }
 
     public String generateClientId(String id) {
         return globalizeId(id).replace(".", "_");
     }
 
     public void setFormEngine(FormEngine value) {
-		formEngine = value;
-	}
+        formEngine = value;
+    }
 
     /**
      * This method creates component proxy for the given type and id. The id is automatically
@@ -83,18 +83,18 @@ public abstract class Form extends Component {
      * @param <T>   component type
      * @return      instance of the component proxy, with restored state
      */
-	protected <T extends ComponentProxy> T $$(Class<T> type, String id) {
-		try {
-			T obj = type.newInstance();
-			obj.setId(globalizeId(id));
-			obj.restore(formEngine.getParameterMap());
-			return obj;
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    protected <T extends ComponentProxy> T $$(Class<T> type, String id) {
+        try {
+            T obj = type.newInstance();
+            obj.setId(globalizeId(id));
+            obj.restore(formEngine.getParameterMap());
+            return obj;
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * This method creates component proxy for the given type and selector. The ids
@@ -105,17 +105,17 @@ public abstract class Form extends Component {
      * @param <T>   component type
      * @return      instance of the component proxy, with restored state
      */
-	protected <T extends ComponentProxy> T $(Class<T> type, String query) {
-		try {
-			T obj = type.newInstance();
-			obj.setQuery(query.replace("#", "#" + getClientId() + "_"));
-			return obj;
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    protected <T extends ComponentProxy> T $(Class<T> type, String query) {
+        try {
+            T obj = type.newInstance();
+            obj.setQuery(query.replace("#", "#" + getClientId() + "_"));
+            return obj;
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * This method can be used in the event handlers of the Form to get request parameters.
@@ -124,9 +124,9 @@ public abstract class Form extends Component {
      * @return      value of the parameter
      *
      */
-	protected String getParameter(String name) {
-		return formEngine.getParameter(globalizeId(name));
-	}
+    protected String getParameter(String name) {
+        return formEngine.getParameter(globalizeId(name));
+    }
 
     protected MultipartFile getFile(String name) {
         return formEngine.getFile(globalizeId(name));
@@ -144,13 +144,19 @@ public abstract class Form extends Component {
      * @return              HtmlFragment with rendered fragment
      *
      */
-	protected HtmlFragment renderFragment(String fragmentName, Object model) {
-		return formEngine.renderFragment(this, fragmentName, model);
-	}
+    protected HtmlFragment renderFragment(String fragmentName, Object model) {
+        return formEngine.renderFragment(this, fragmentName, model);
+    }
 
     protected HtmlFragment renderMainView(Form form, String suffix) {
         form.setId(getId() + "." + suffix);
         return formEngine.renderMainView(form);
+    }
+
+    @Override
+    protected void fillHtmlAttributes(Map<String, String> attributes) {
+        super.fillHtmlAttributes(attributes);
+        attributes.put("method", "post");
     }
 
     /**
@@ -170,9 +176,9 @@ public abstract class Form extends Component {
      * @return  model object for the main view
      *
      */
-	protected Object prepareModel() {
-		return null;
-	}
+    protected Object prepareModel() {
+        return null;
+    }
 
     /**
      * This method is called after all components of the Form's main view are initialized. Typically,
@@ -180,8 +186,8 @@ public abstract class Form extends Component {
      * initialization of the main view is done.
      *
      */
-	protected void afterInit() {
-	}
+    protected void afterInit() {
+    }
 
     /**
      * The javascript component is fixed to "Form", because we are not going to have
@@ -189,10 +195,10 @@ public abstract class Form extends Component {
      *
      * @return  javascript component name
      */
-	@Override
-	protected String getClassName() {
-		return "Form";
-	}
+    @Override
+    protected String getClassName() {
+        return "Form";
+    }
 
     /**
      * Sends Form's state to the client
@@ -200,10 +206,14 @@ public abstract class Form extends Component {
      * @param state state representation for the client
      *
      */
-	protected void update(String state) {
+    protected void update(String state) {
         if(disposed) return;
-		invoke("update", state);
-	}
+        invoke("update", state);
+    }
 
     protected abstract void processThrowable(Throwable t);
+
+    protected void setDisposed(boolean value) {
+        disposed = value;
+    }
 }

@@ -5,29 +5,6 @@
  * @version 1.0
  *
  */
-jasty.JQuery = jasty.extend(jasty.Control, {
-	text: function(self, value) {
-		self.text(value);
-	},
-
-	html: function(self, value) {
-		jasty.render(value, function(html) {
-            self.empty();
-		    self.append(html);
-		});
-    },
-
-	append: function(self, content) {
-	    jasty.render(content, function(html) {
-    		self.append(html);
-	    })
-	},
-
-	empty: function(self) {
-	    self.empty();
-	}
-});
-
 jasty.Link = jasty.extend(jasty.Control, {
 
 	init: function(self, opts) {
@@ -138,21 +115,4 @@ jasty.ComboBox = jasty.extend(jasty.Control, {
 	    });
 	    self.val(oldValue);
 	}
-});
-
-
-jasty.Block = jasty.extend(jasty.Control, {
-
-    init: function(self, opts) {
-        this.parent.init(self, opts);
-        self.text(opts.text);
-        self.click(function() {
-            jasty.raiseEvent(self, opts.onClick, {srcId: self.attr("id"), data: opts.data});
-            return false;
-        });
-    },
-
-    text: function(self, value) {
-        self.text(value);
-    }
 });

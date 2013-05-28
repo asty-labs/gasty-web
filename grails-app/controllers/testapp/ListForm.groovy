@@ -1,7 +1,7 @@
 package testapp
 
 import com.jasty.core.Form
-import com.jasty.components.Link
+import com.jasty.components.std.Link
 import com.jasty.components.JQuery
 import com.jasty.core.EventArgs
 

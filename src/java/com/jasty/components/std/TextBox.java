@@ -1,4 +1,4 @@
-package com.jasty.components;
+package com.jasty.components.std;
 
 import java.util.Map;
 
