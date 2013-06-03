@@ -7,7 +7,7 @@ import com.jasty.core.ParameterProvider
 import com.jasty.core.ViewRenderer
 import org.codehaus.groovy.grails.web.pages.GroovyPagesTemplateEngine
 
-class AppController {
+class GastyController {
 
     GroovyPagesTemplateEngine groovyPagesTemplateEngine
 

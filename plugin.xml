@@ -6,7 +6,7 @@
   <documentation>http://grails.org/plugin/gasty</documentation>
   <type>GastyGrailsPlugin</type>
   <resources>
-    <resource>gasty.AppController</resource>
+    <resource>gasty.GastyController</resource>
     <resource>testapp.AddingForm</resource>
     <resource>testapp.ListForm</resource>
     <resource>gasty.StandardTagLib</resource>

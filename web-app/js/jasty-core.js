@@ -164,7 +164,11 @@ jasty.Form = jasty.extend(jasty.Control, {
             }
 		};
         self.ajaxSubmit(props);
-	}
+	},
+
+    errors: function(self, errorMessage) {
+        alert(errorMessage);
+    }
 });
 
 jasty.JQuery = jasty.extend(jasty.Control, {
