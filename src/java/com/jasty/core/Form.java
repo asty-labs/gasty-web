@@ -211,8 +211,6 @@ public abstract class Form extends Component {
         invoke("update", state);
     }
 
-    protected abstract void processThrowable(Throwable t);
-
     protected void setDisposed(boolean value) {
         disposed = value;
     }

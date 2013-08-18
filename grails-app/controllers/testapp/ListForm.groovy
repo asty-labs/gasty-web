@@ -44,9 +44,4 @@ class ListForm extends Form {
         if(!items.contains(item))
             items.add(item)
     }
-
-    @Override
-    protected void processThrowable(Throwable t) {
-        invoke("errors", [[message: t.message]])
-    }
 }

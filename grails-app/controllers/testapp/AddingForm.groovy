@@ -26,9 +26,4 @@ class AddingForm extends Form {
     public void cancelClicked(EventArgs e) {
         replaceWith(parent)
     }
-
-    @Override
-    protected void processThrowable(Throwable t) {
-        invoke("errors", [[message: t.message]])
-    }
 }

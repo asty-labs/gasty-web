@@ -15,10 +15,10 @@ public class SimpleExceptionHandler implements MethodInvoker {
             methodInvoker.invoke(form, parameterProvider);
         }
         catch(FormEngine.FormEngineException e) {
-            form.processThrowable(e.getCause());
+            form.invoke("errors", e.getCause().getMessage());
         }
         catch(Throwable t) {
-            form.processThrowable(t);
+            form.invoke("errors", t.getMessage());
         }
     }
 }

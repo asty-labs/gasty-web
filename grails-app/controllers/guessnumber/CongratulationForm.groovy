@@ -18,9 +18,4 @@ class CongratulationForm extends Form {
     void startNewGame(EventArgs e) {
         replaceWith(new MainForm())
     }
-
-    @Override
-    protected void processThrowable(Throwable t) {
-        invoke("errors", t.message)
-    }
 }

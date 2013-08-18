@@ -64,9 +64,4 @@ class MainForm extends Form {
             return "You have made 1 guess."
         "You have made ${numberOfTries} guesses."
     }
-
-    @Override
-    protected void processThrowable(Throwable t) {
-        invoke("errors", t.message)
-    }
 }
