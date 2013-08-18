@@ -5,8 +5,6 @@ import com.jasty.js.JsContext;
 import com.jasty.js.JsExpression;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
@@ -22,13 +20,17 @@ public class FormEngine {
     private final ParameterProvider parameterProvider;
     private final ViewRenderer viewRenderer;
     private FormPersister formPersister;
+    private MethodInvoker methodInvoker;
 
     public FormEngine(ParameterProvider parameterProvider,
-                      ViewRenderer viewRenderer, FormPersister formPersister) {
+                      ViewRenderer viewRenderer,
+                      FormPersister formPersister,
+                      MethodInvoker methodInvoker) {
 
         this.parameterProvider = parameterProvider;
         this.viewRenderer = viewRenderer;
         this.formPersister = formPersister;
+        this.methodInvoker = methodInvoker;
     }
 
     /**
@@ -142,73 +144,18 @@ public class FormEngine {
         });
     }
 
-    public void runInContext(Form form, Runnable action) {
-        form.setFormEngine(this);
-        try {
-            action.run();
-        }
-        catch(FormEngineException e) {
-            form.processThrowable(e.getCause());
-        }
-        catch(Throwable t) {
-            form.processThrowable(t);
-        }
-        updateForm(form);
-    }
-
     private void executeMethod() {
         final Form form = formPersister.lookup(getParameter("state"));
         form.setFormEngine(this);
-        final String eventHandler = getParameter("eventHandler");
-        final EventArgs args = extractEventArgs(parameterProvider.getParameterMap(), form);
-        runInContext(form, new Runnable() {
-            @Override
-            public void run() {
-                Method method = null;
-                try {
-                    method = form.getClass().getMethod(eventHandler, EventArgs.class);
-                    method.invoke(form, args);
-                } catch (NoSuchMethodException e) {
-                    throw new FormEngineException(e);
-                } catch (InvocationTargetException e) {
-                    throw new FormEngineException(e.getTargetException());
-                } catch (IllegalAccessException e) {
-                    throw new FormEngineException(e);
-                }
-            }
-        });
+        methodInvoker.invoke(form, parameterProvider);
+        updateForm(form);
     }
 
     private void updateForm(Form form) {
         form.update(formPersister.persist(form));
     }
 
-    private static final String EVENT_PREFIX = "EVT.";
-
-    /**
-     * Fills EventArgs object from the request parameters
-     *
-     * @param map       request parameters
-     * @param form      form, owning the event
-     * @return          filled out EventArgs-object
-     */
-    private static EventArgs extractEventArgs(Map<String, Object> map, Form form) {
-
-        EventArgs args = new EventArgs();
-        for(String key : map.keySet()) {
-            if(key.startsWith(EVENT_PREFIX)) {
-                String value = (String)map.get(key);
-                key = key.substring(EVENT_PREFIX.length());
-                if("srcId".equals(key))
-                    args.setSrcId(value.substring(form.getId().length() + 1));
-                else
-                    args.put(key, value);
-            }
-        }
-        return args;
-    }
-
-    private static class FormEngineException extends RuntimeException {
+    public static class FormEngineException extends RuntimeException {
 
         public FormEngineException(Throwable t) {
             super(t);

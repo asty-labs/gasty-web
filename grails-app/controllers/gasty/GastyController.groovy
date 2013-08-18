@@ -6,6 +6,8 @@ import com.jasty.core.ClientSideFormPersister
 import com.jasty.core.ParameterProvider
 import com.jasty.core.ViewRenderer
 import org.codehaus.groovy.grails.web.pages.GroovyPagesTemplateEngine
+import com.jasty.core.SimpleExceptionHandler
+import com.jasty.core.DefaultMethodInvoker
 
 class GastyController {
 
@@ -19,7 +21,10 @@ class GastyController {
         ParameterProvider parameterProvider = new RequestParameterProvider(params);
         ViewRenderer viewRenderer = new GspViewRenderer(groovyPagesTemplateEngine);
 
-        JsExpression expr = new FormEngine(parameterProvider, viewRenderer, ClientSideFormPersister.getInstance()).processEvent();
+        JsExpression expr = new FormEngine(parameterProvider,
+                viewRenderer,
+                ClientSideFormPersister.getInstance(),
+                new SimpleExceptionHandler(new DefaultMethodInvoker())).processEvent();
 
         if(response.isCommitted()) return;
 
