@@ -1,7 +1,5 @@
 package com.jasty.core;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.Map;
 
 /**
@@ -15,7 +13,7 @@ public interface ParameterProvider {
 
     String getParameter(String name);
 
-    MultipartFile getFile(String name);
+    UploadedFile getFile(String name);
 
     Map<String, Object> getParameterMap();
     

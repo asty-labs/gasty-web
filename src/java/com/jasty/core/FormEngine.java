@@ -3,7 +3,6 @@ package com.jasty.core;
 import com.jasty.js.JsClosure;
 import com.jasty.js.JsContext;
 import com.jasty.js.JsExpression;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -55,7 +54,7 @@ public class FormEngine {
         return parameterProvider.getParameter(key);
     }
 
-    protected MultipartFile getFile(String key) {
+    protected UploadedFile getFile(String key) {
         return parameterProvider.getFile(key);
     }
 

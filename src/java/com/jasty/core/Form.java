@@ -1,7 +1,5 @@
 package com.jasty.core;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.Map;
 
 /**
@@ -128,7 +126,7 @@ public abstract class Form extends Component {
         return formEngine.getParameter(globalizeId(name));
     }
 
-    protected MultipartFile getFile(String name) {
+    protected UploadedFile getFile(String name) {
         return formEngine.getFile(globalizeId(name));
     }
 

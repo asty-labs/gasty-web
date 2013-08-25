@@ -6,12 +6,18 @@
   <documentation>http://grails.org/plugin/gasty</documentation>
   <type>GastyGrailsPlugin</type>
   <resources>
+    <resource>BootStrap</resource>
     <resource>gasty.GastyController</resource>
+    <resource>guessnumber.CongratulationForm</resource>
+    <resource>guessnumber.MainForm</resource>
     <resource>testapp.AddingForm</resource>
     <resource>testapp.ListForm</resource>
     <resource>gasty.StandardTagLib</resource>
     <resource>gasty.std.StdTagLib</resource>
+    <resource>gasty.DefaultGrailsFormEngineFactory</resource>
+    <resource>gasty.GrailsFormEngineFactory</resource>
     <resource>gasty.GspViewRenderer</resource>
+    <resource>gasty.MultipartFileWrapper</resource>
     <resource>gasty.RenderingHelper</resource>
     <resource>gasty.RequestParameterProvider</resource>
   </resources>
@@ -31,12 +37,12 @@
       <plugin group='org.grails.plugins' name='cache' version='1.0.0' />
     </compile>
     <runtime>
-      <plugin group='org.grails.plugins' name='resources' version='1.1.6' />
-      <plugin group='org.grails.plugins' name='jquery' version='1.8.0' />
-      <plugin group='org.grails.plugins' name='hibernate' version='2.1.2' />
-      <plugin group='org.grails.plugins' name='mail' version='1.0.1' />
-      <plugin group='org.grails.plugins' name='database-migration' version='1.1' />
       <plugin group='org.grails.plugins' name='crypto' version='2.0' />
+      <plugin group='org.grails.plugins' name='mail' version='1.0.1' />
+      <plugin group='org.grails.plugins' name='jquery' version='1.8.0' />
+      <plugin group='org.grails.plugins' name='resources' version='1.1.6' />
+      <plugin group='org.grails.plugins' name='database-migration' version='1.1' />
+      <plugin group='org.grails.plugins' name='hibernate' version='2.1.2' />
     </runtime>
     <build>
       <plugin group='org.grails.plugins' name='tomcat' version='2.1.2' />

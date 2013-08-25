@@ -73,7 +73,7 @@ public abstract class ComponentProxy implements Serializable {
      * @param method method name
      * @param params arbitrary method parameters
      */
-    protected final void invoke(String method, Object ... params) {
+    public final void invoke(String method, Object ... params) {
         if(getId() == null && query == null) return;
         ArrayList<Object> p = new ArrayList<Object>();
         Collections.addAll(p, params);

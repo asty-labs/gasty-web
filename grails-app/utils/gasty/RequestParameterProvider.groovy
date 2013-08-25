@@ -2,8 +2,8 @@ package gasty
 
 import com.jasty.core.ParameterProvider
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
-import javax.servlet.http.HttpServletRequest
 import org.springframework.web.multipart.MultipartFile
+import com.jasty.core.UploadedFile
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,8 +26,8 @@ class RequestParameterProvider implements ParameterProvider {
     }
 
     @Override
-    MultipartFile getFile(String name) {
-        parameters[name]
+    UploadedFile getFile(String name) {
+        new MultipartFileWrapper(parameters[name] as MultipartFile)
     }
 
     @Override
