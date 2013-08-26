@@ -2,6 +2,7 @@ package com.jasty.components.std;
 
 import com.jasty.core.Component;
 import com.jasty.core.InitProperty;
+import com.jasty.core.ParameterProvider;
 
 import java.util.Map;
 
@@ -22,8 +23,8 @@ public class CheckBox extends Component {
     private String onChange;
 
     @Override
-    public void restore(Map<String, Object> data) {
-        checked = data.containsKey(getId()) && "1".equals(data.get(getId()));
+    public void restore(ParameterProvider parameterProvider) {
+        checked = parameterProvider.getKeys().contains(getId()) && "1".equals(parameterProvider.getParameter(getId()));
     }
 
     @Override

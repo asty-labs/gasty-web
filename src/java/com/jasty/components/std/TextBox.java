@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.jasty.core.Component;
 import com.jasty.core.InitProperty;
+import com.jasty.core.ParameterProvider;
 
 /**
  * Component proxy for HTML text editor
@@ -42,9 +43,9 @@ public class TextBox extends Component {
     }
 
     @Override
-	public void restore(Map<String, Object> data) {
-        if(data.containsKey(getId()))
-    		value = (String)data.get(getId());
+	public void restore(ParameterProvider parameterProvider) {
+        if(parameterProvider.getKeys().contains(getId()))
+    		value = parameterProvider.getParameter(getId());
 	}
 
     @Override

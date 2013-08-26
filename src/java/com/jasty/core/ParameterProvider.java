@@ -1,6 +1,6 @@
 package com.jasty.core;
 
-import java.util.Map;
+import java.util.Collection;
 
 /**
  * This interface is an abstraction to get request parameters. Used by FormEngine
@@ -15,6 +15,6 @@ public interface ParameterProvider {
 
     UploadedFile getFile(String name);
 
-    Map<String, Object> getParameterMap();
+    Collection<String> getKeys();
     
 }

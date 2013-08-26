@@ -4,9 +4,7 @@ import com.jasty.core.ParameterProvider;
 import com.jasty.core.UploadedFile;
 
 import javax.servlet.ServletRequest;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Facade to the parameters from ServletRequest
@@ -34,12 +32,12 @@ public class RequestParameterProvider implements ParameterProvider {
     }
 
     @Override
-    public Map<String, Object> getParameterMap() {
-        Map<String, Object> result = new HashMap<String, Object>();
+    public Collection<String> getKeys() {
+        Set<String> result = new HashSet<String>();
         Enumeration e = req.getParameterNames();
         while(e.hasMoreElements()) {
             String key = (String)e.nextElement();
-            result.put(key, req.getParameter(key));
+            result.add(key);
         }
         return result;
     }

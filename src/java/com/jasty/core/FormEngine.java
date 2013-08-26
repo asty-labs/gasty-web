@@ -4,8 +4,6 @@ import com.jasty.js.JsClosure;
 import com.jasty.js.JsContext;
 import com.jasty.js.JsExpression;
 
-import java.util.Map;
-
 /**
  * This is the central class for managing Form events, rendering views and
  * resolving entry points
@@ -37,8 +35,8 @@ public class FormEngine {
      * The entry point class must have parameterless constructor and
      * either implement FormFactory or be a Form.
      *
-     * @param entryPointClass
-     * @param parameters
+     * @param entryPointClass   full class name of the entry point
+     * @param parameters        additional parameters to configure entry point
      * @return resolved form
      *
      */
@@ -49,17 +47,17 @@ public class FormEngine {
         if(obj instanceof Form) return (Form)obj;
         throw new RuntimeException("Wrong class: must be either FormFactory or Form");
     }
-    
+
+    public ParameterProvider getParameterProvider() {
+        return parameterProvider;
+    }
+
     protected String getParameter(String key) {
         return parameterProvider.getParameter(key);
     }
 
     protected UploadedFile getFile(String key) {
         return parameterProvider.getFile(key);
-    }
-
-    protected Map<String, Object> getParameterMap() {
-        return parameterProvider.getParameterMap();
     }
 
     /**

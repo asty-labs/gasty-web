@@ -2,7 +2,6 @@ package com.jasty.core;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
 
 public class DefaultMethodInvoker implements MethodInvoker {
 
@@ -11,7 +10,7 @@ public class DefaultMethodInvoker implements MethodInvoker {
     @Override
     public void invoke(Form form, ParameterProvider parameterProvider) {
         final String eventHandler = parameterProvider.getParameter("eventHandler");
-        final EventArgs args = extractEventArgs(parameterProvider.getParameterMap(), form);
+        final EventArgs args = extractEventArgs(parameterProvider, form);
         try {
             Method method = form.getClass().getMethod(eventHandler, EventArgs.class);
             method.invoke(form, args);
@@ -27,16 +26,16 @@ public class DefaultMethodInvoker implements MethodInvoker {
     /**
      * Fills EventArgs object from the request parameters
      *
-     * @param map       request parameters
+     * @param parameterProvider       request parameters
      * @param form      form, owning the event
      * @return          filled out EventArgs-object
      */
-    private static EventArgs extractEventArgs(Map<String, Object> map, Form form) {
+    private static EventArgs extractEventArgs(ParameterProvider parameterProvider, Form form) {
 
         EventArgs args = new EventArgs();
-        for(String key : map.keySet()) {
+        for(String key : parameterProvider.getKeys()) {
             if(key.startsWith(EVENT_PREFIX)) {
-                String value = (String)map.get(key);
+                String value = parameterProvider.getParameter(key);
                 key = key.substring(EVENT_PREFIX.length());
                 if("srcId".equals(key))
                     args.setSrcId(value.substring(form.getId().length() + 1));

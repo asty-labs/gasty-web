@@ -27,7 +27,7 @@ jasty.Button = jasty.extend(jasty.Control, {
 	init: function(self, opts) {
         this.parent.init(self, opts);
         self.text(opts.text);
-        self.addClass("jasty-button")
+        self.addClass("jasty-button");
         self.click(function() {
 			jasty.raiseEvent(self, opts.onClick, {srcId: self.attr("id"), data: opts.data});
 			return false;
@@ -44,7 +44,7 @@ jasty.TextBox = jasty.extend(jasty.Control, {
 	init: function(self, opts) {
 		self.attr("name", opts.id);
         if(opts.maxLength) self.attr("maxlength", opts.maxLength);
-        self.addClass("jasty-textbox")
+        self.addClass("jasty-textbox");
         self.val(opts.value);
         if(opts.rows) self.attr("rows", opts.rows);
         if(opts.cols) self.attr("cols", opts.cols);
@@ -58,15 +58,15 @@ jasty.TextBox = jasty.extend(jasty.Control, {
 jasty.CheckBox = jasty.extend(jasty.Control, {
 	init: function(self, opts) {
 		self.attr("name", opts.id + "_cb");
-        self.addClass("jasty-checkbox")
+        self.addClass("jasty-checkbox");
         var valueHolder = $("<input/>").attr("type", "hidden").attr("name", opts.id);
         self.after(valueHolder);
 		if(opts.checked) {
 		    self.attr("checked", "checked");
         }
-        valueHolder.val(opts.checked ? "1" : "0")
+        valueHolder.val(opts.checked ? "1" : "0");
         self.change(function() {
-            valueHolder.val(self.attr("checked") == "checked" ? "1" : "0")
+            valueHolder.val(self.attr("checked") == "checked" ? "1" : "0");
             if(opts.onChange) {
                 jasty.raiseEvent(self, opts.onChange, {srcId: self.attr("id"),
                 data: opts.data,
@@ -88,7 +88,7 @@ jasty.CheckBox = jasty.extend(jasty.Control, {
 jasty.ComboBox = jasty.extend(jasty.Control, {
 	init: function(self, opts) {
         this.parent.init(self, opts);
-        self.addClass("jasty-combobox")
+        self.addClass("jasty-combobox");
         self.attr("name", opts.id);
 		if(opts.options)
 		    this.options(self, opts.options);
@@ -115,4 +115,11 @@ jasty.ComboBox = jasty.extend(jasty.Control, {
 	    });
 	    self.val(oldValue);
 	}
+});
+
+jasty.FileUpload = jasty.extend(jasty.Control, {
+    init: function(self, opts) {
+        self.attr("name", opts.id);
+        self.addClass("jasty-fileupload")
+    }
 });

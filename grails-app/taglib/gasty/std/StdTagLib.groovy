@@ -6,6 +6,7 @@ import com.jasty.components.std.Link
 import com.jasty.components.std.TextBox
 import com.jasty.components.std.ComboBox
 import com.jasty.components.std.CheckBox
+import com.jasty.components.std.FileUpload
 
 class StdTagLib {
 
@@ -31,4 +32,7 @@ class StdTagLib {
         RenderingHelper.render(CheckBox, out, attrs, true)
     }
 
+    def fileUpload = { attrs ->
+        RenderingHelper.render(FileUpload, out, attrs, true)
+    }
 }

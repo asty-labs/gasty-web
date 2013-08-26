@@ -31,7 +31,7 @@ class RequestParameterProvider implements ParameterProvider {
     }
 
     @Override
-    Map<String, Object> getParameterMap() {
-        parameters
+    Collection<String> getKeys() {
+        parameters.keySet()
     }
 }

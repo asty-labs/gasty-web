@@ -59,10 +59,9 @@ class ParameterResolvingMethodInvoker implements MethodInvoker {
     private static EventArgs extractEventArgs(Form form, ParameterProvider parameterProvider) {
 
         def args = new EventArgs()
-        def map = parameterProvider.parameterMap
-        for(def key : map.keySet()) {
+        for(def key : parameterProvider.keys) {
             if(key.startsWith(EVENT_PREFIX)) {
-                def value = (String)map.get(key)
+                def value = parameterProvider.getParameter(key)
                 key = key.substring(EVENT_PREFIX.length())
                 if("srcId" == key)
                     args.put("source", value.substring(form.getId().length() + 1))

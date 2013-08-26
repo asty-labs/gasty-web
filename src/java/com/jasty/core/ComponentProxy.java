@@ -6,7 +6,6 @@ import com.jasty.js.JsContext;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 
 /**
  * This is the base class for all javascript component server-proxies.
@@ -109,9 +108,9 @@ public abstract class ComponentProxy implements Serializable {
      * This method can be overridden to restore the internal state of the component
      * from the current request.
      *
-     * @param data all available data to restore component state from
+     * @param parameterProvider all available data to restore component state from
      */
-    public void restore(Map<String, Object> data) {
+    public void restore(ParameterProvider parameterProvider) {
 
     }
 }

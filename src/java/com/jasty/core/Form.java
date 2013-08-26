@@ -85,7 +85,7 @@ public abstract class Form extends Component {
         try {
             T obj = type.newInstance();
             obj.setId(globalizeId(id));
-            obj.restore(formEngine.getParameterMap());
+            obj.restore(formEngine.getParameterProvider());
             return obj;
         } catch (InstantiationException e) {
             throw new RuntimeException(e);
@@ -128,10 +128,6 @@ public abstract class Form extends Component {
 
     protected UploadedFile getFile(String name) {
         return formEngine.getFile(globalizeId(name));
-    }
-
-    protected Map<String, Object> getParameters() {
-        return formEngine.getParameterMap();
     }
 
     /**

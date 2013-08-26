@@ -2,8 +2,7 @@ package com.jasty.components.std;
 
 import com.jasty.core.Component;
 import com.jasty.core.InitProperty;
-
-import java.util.Map;
+import com.jasty.core.ParameterProvider;
 
 /**
  * Component proxy for HTML combo editor
@@ -24,9 +23,9 @@ public class ComboBox extends Component {
     private Iterable<Option> options;
 
     @Override
-    public void restore(Map<String, Object> data) {
-        if(data.containsKey(getId()))
-            value = (String)data.get(getId());
+    public void restore(ParameterProvider parameterProvider) {
+        if(parameterProvider.getKeys().contains(getId()))
+            value = parameterProvider.getParameter(getId());
     }
 
     @Override
