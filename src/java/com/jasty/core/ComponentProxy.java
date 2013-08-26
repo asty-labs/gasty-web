@@ -101,7 +101,7 @@ public abstract class ComponentProxy implements Serializable {
         invoke("remove");
     }
 
-    public void replaceWith(HtmlFragment fragment) {
+    public void replaceWith(Object fragment) {
         invoke("replaceWith", fragment);
     }
 

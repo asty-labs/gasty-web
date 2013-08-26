@@ -18,9 +18,7 @@ public class JsContext {
      */
 	public static void add(final JsCall call) {
 		JsSequence fragment = contexts.get();
-		if(fragment == null)
-			throw new IllegalStateException("no script context!");
-		fragment.add(call);
+		if(fragment != null) fragment.add(call);
 	}
 
     /**

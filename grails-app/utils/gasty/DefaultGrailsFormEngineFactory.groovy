@@ -7,14 +7,14 @@ import com.jasty.core.ParameterProvider
 import com.jasty.core.ViewRenderer
 import com.jasty.core.ClientSideFormPersister
 import com.jasty.core.SimpleExceptionHandler
-import com.jasty.core.DefaultMethodInvoker
+
 import com.jasty.core.FormPersister
 import com.jasty.core.MethodInvoker
 
 class DefaultGrailsFormEngineFactory extends GrailsFormEngineFactory {
 
     private FormPersister formPersister = new ClientSideFormPersister()
-    private MethodInvoker methodInvoker = new SimpleExceptionHandler(new DefaultMethodInvoker())
+    private MethodInvoker methodInvoker = new SimpleExceptionHandler(new ParameterResolvingMethodInvoker())
 
     @Override
     FormEngine getFormEngine(GrailsParameterMap params, GroovyPagesTemplateEngine groovyPagesTemplateEngine) {

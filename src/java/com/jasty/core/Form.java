@@ -57,7 +57,7 @@ public abstract class Form extends Component {
      * @param initialId to be adjusted
      * @return unique id
      */
-    private String globalizeId(String initialId) {
+    public String globalizeId(String initialId) {
         if(initialId == null)
             initialId = "c" + lastAssignedChildId++;
         return getClientId() + "." + initialId;
@@ -81,7 +81,7 @@ public abstract class Form extends Component {
      * @param <T>   component type
      * @return      instance of the component proxy, with restored state
      */
-    protected <T extends ComponentProxy> T $$(Class<T> type, String id) {
+    public <T extends ComponentProxy> T $$(Class<T> type, String id) {
         try {
             T obj = type.newInstance();
             obj.setId(globalizeId(id));

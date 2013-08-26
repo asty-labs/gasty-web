@@ -1,7 +1,6 @@
 package guessnumber
 
 import com.jasty.core.Form
-import com.jasty.core.EventArgs
 import com.jasty.components.JQuery
 import com.jasty.components.std.TextBox
 
@@ -12,13 +11,11 @@ class MainForm extends Form {
     int lowerBound = 1
     int upperBound = 100
 
-    void startNewGame(EventArgs e) {
+    void startNewGame() {
         replaceWith(new MainForm())
     }
 
-    void processGuess(EventArgs e) {
-        def stats = $$(JQuery, "stats")
-        def guessEntryField = $$(TextBox, "guessEntryField")
+    void processGuess(JQuery stats, TextBox guessEntryField) {
 
         int guess
         try {

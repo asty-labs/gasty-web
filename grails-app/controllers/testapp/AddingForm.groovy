@@ -1,7 +1,6 @@
 package testapp
 
 import com.jasty.core.Form
-import com.jasty.core.EventArgs
 
 class AddingForm extends Form {
 
@@ -18,12 +17,12 @@ class AddingForm extends Form {
         [model: currentCount + 1]
     }
 
-    public void okClicked(EventArgs e) {
-        parent.addItem(getParameter("text"))
+    public void okClicked(String text) {
+        parent.addItem(text)
         replaceWith(parent)
     }
 
-    public void cancelClicked(EventArgs e) {
+    public void cancelClicked() {
         replaceWith(parent)
     }
 }

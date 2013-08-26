@@ -4,7 +4,7 @@ import com.jasty.js.JsExpression
 import org.codehaus.groovy.grails.web.pages.GroovyPagesTemplateEngine
 import com.jasty.servlet.FormEngineServlet
 
-class GastyController {
+class FormEngineController {
 
     GroovyPagesTemplateEngine groovyPagesTemplateEngine
 

@@ -3,14 +3,14 @@
 <html>
 <head>
     <title>Form samples</title>
-    <script src="${jasty.resource(dir: 'js', file: 'jquery-1.8.3.js')}" type="text/javascript"></script>
-    <script src="${jasty.resource(dir: 'js', file: 'jquery.form.js')}" type="text/javascript"></script>
-    <script src="${jasty.resource(dir: 'js', file: 'jasty-core.js')}" type="text/javascript"></script>
-    <script src="${jasty.resource(dir: 'js', file: 'jasty-std.js')}" type="text/javascript"></script>
+    <script src="${g.resource(dir: 'js', file: 'jquery-1.8.3.js')}" type="text/javascript"></script>
+    <script src="${g.resource(dir: 'js', file: 'jquery.form.js')}" type="text/javascript"></script>
+    <script src="${g.resource(dir: 'js', file: 'jasty-core.js')}" type="text/javascript"></script>
+    <script src="${g.resource(dir: 'js', file: 'jasty-std.js')}" type="text/javascript"></script>
 </head>
 <body>
 <script>
-    jasty.settings.formEngineUrl = "${g.createLink([controller: 'gasty', action: 'doAction'])}";
+    jasty.settings.formEngineUrl = "${g.createLink([controller: 'formEngine', action: 'doAction'])}";
 </script>
 <g:if test="${params.entry}">
     <jasty:formViewer id="myform" entryPoint="${params.entry}" />

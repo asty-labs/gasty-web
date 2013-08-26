@@ -33,5 +33,6 @@ public class EventArgs {
 
     public void setSrcId(String srcId) {
         this.srcId = srcId;
+        args.put("source", srcId);
     }
 }

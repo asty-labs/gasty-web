@@ -1,25 +1,20 @@
 class GastyGrailsPlugin {
-    // the plugin version
     def version = "0.1"
-    // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.1 > *"
-    // the other plugins this plugin depends on
     def dependsOn = [:]
-    // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]
 
-    // TODO Fill in these fields
     def title = "Gasty Plugin" // Headline display name of the plugin
-    def author = "Your name"
-    def authorEmail = ""
+    def author = "Stanislav tkachev"
+    def authorEmail = "s.tkachev@gmail.com"
     def description = '''\
-Brief summary/description of the plugin.
+Lightweight AJAX web framework. Enables component based, quasi stateful development of the highly dynamic web applications
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/gasty"
+    def documentation = "http://www.asty-labs.com/web-framework-features"
 
     // Extra (optional) plugin metadata
 

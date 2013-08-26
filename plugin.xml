@@ -7,7 +7,7 @@
   <type>GastyGrailsPlugin</type>
   <resources>
     <resource>BootStrap</resource>
-    <resource>gasty.GastyController</resource>
+    <resource>gasty.FormEngineController</resource>
     <resource>guessnumber.CongratulationForm</resource>
     <resource>guessnumber.MainForm</resource>
     <resource>testapp.AddingForm</resource>

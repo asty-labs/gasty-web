@@ -15,7 +15,7 @@ class CongratulationForm extends Form {
         [numberOfTries: numberOfTries]
     }
 
-    void startNewGame(EventArgs e) {
+    void startNewGame() {
         replaceWith(new MainForm())
     }
 }

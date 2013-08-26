@@ -3,7 +3,6 @@ package testapp
 import com.jasty.core.Form
 import com.jasty.components.std.Link
 import com.jasty.components.JQuery
-import com.jasty.core.EventArgs
 
 class ListForm extends Form {
 
@@ -25,19 +24,18 @@ class ListForm extends Form {
         $(JQuery, ".list").append(link)
     }
 
-    void searchClicked(EventArgs e) {
+    void searchClicked(String searchText) {
         $(JQuery, ".list").empty()
-        def text = getParameter("searchText")
-        items.findAll {it.contains(text)}.each {displayItem(it)}
+        items.findAll {it.contains(searchText)}.each {displayItem(it)}
     }
 
-    void addClicked(EventArgs e) {
+    void addClicked() {
         replaceWith(new AddingForm(items.size(), this))
     }
 
-    void deleteClicked(EventArgs e) {
-        $$(Link, e.srcId).remove()
-        items.remove(e.get("data"))
+    void deleteClicked(Link eventSource, String eventData) {
+        eventSource.remove()
+        items.remove(eventData)
     }
 
     void addItem(String item) {
