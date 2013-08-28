@@ -52,14 +52,6 @@ public class FormEngine {
         return parameterProvider;
     }
 
-    protected String getParameter(String key) {
-        return parameterProvider.getParameter(key);
-    }
-
-    protected UploadedFile getFile(String key) {
-        return parameterProvider.getFile(key);
-    }
-
     /**
      * Renders main view for the Form, using the model returned by prepareModel-method.
      * Generates javascript to initialize all rendered components.
@@ -142,7 +134,7 @@ public class FormEngine {
     }
 
     private void executeMethod() {
-        final Form form = formPersister.lookup(getParameter("state"));
+        final Form form = formPersister.lookup(getParameterProvider().getParameter("state"));
         form.setFormEngine(this);
         methodInvoker.invoke(form, parameterProvider);
         updateForm(form);

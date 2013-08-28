@@ -54,6 +54,7 @@ public abstract class FormEngineServlet extends HttpServlet {
 
             String userAgent = req.getHeader("user-agent").toLowerCase();
 
+            resp.setContentType("text/html");
             // STK: performance fix for firefox, when trying to render big javascript in textarea - use span containing comment instead
             if(userAgent.contains("firefox")) {
                 writer.write("<span><!--");

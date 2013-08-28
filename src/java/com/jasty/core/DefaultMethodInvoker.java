@@ -33,7 +33,7 @@ public class DefaultMethodInvoker implements MethodInvoker {
     private static EventArgs extractEventArgs(ParameterProvider parameterProvider, Form form) {
 
         EventArgs args = new EventArgs();
-        for(String key : parameterProvider.getKeys()) {
+        for(String key : parameterProvider.getParameterNames()) {
             if(key.startsWith(EVENT_PREFIX)) {
                 String value = parameterProvider.getParameter(key);
                 key = key.substring(EVENT_PREFIX.length());

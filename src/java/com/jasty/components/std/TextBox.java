@@ -44,7 +44,7 @@ public class TextBox extends Component {
 
     @Override
 	public void restore(ParameterProvider parameterProvider) {
-        if(parameterProvider.getKeys().contains(getId()))
+        if(parameterProvider.getParameterNames().contains(getId()))
     		value = parameterProvider.getParameter(getId());
 	}
 

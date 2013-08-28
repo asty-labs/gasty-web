@@ -15,6 +15,8 @@ public interface ParameterProvider {
 
     UploadedFile getFile(String name);
 
-    Collection<String> getKeys();
+    Collection<String> getParameterNames();
+
+    String[] getParameterValues(String name);
     
 }

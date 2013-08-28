@@ -1,5 +1,7 @@
 package com.jasty.core;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -122,12 +124,37 @@ public abstract class Form extends Component {
      * @return      value of the parameter
      *
      */
-    protected String getParameter(String name) {
-        return formEngine.getParameter(globalizeId(name));
+    protected ParameterProvider getParameters() {
+        return new FormLocalParameterProvider();
     }
 
-    protected UploadedFile getFile(String name) {
-        return formEngine.getFile(globalizeId(name));
+    class FormLocalParameterProvider implements ParameterProvider {
+
+        @Override
+        public String getParameter(String name) {
+            return formEngine.getParameterProvider().getParameter(globalizeId(name));
+        }
+
+        @Override
+        public UploadedFile getFile(String name) {
+            return formEngine.getParameterProvider().getFile(globalizeId(name));
+        }
+
+        @Override
+        public Collection<String> getParameterNames() {
+
+            String prefix = getClientId() + ".";
+            Collection<String> result = new ArrayList<String>();
+            for(String name : formEngine.getParameterProvider().getParameterNames()) {
+                if(name.startsWith(prefix)) result.add(name.substring(prefix.length()));
+            }
+            return result;
+        }
+
+        @Override
+        public String[] getParameterValues(String name) {
+            return formEngine.getParameterProvider().getParameterValues(globalizeId(name));
+        }
     }
 
     /**

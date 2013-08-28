@@ -22,16 +22,26 @@ class RequestParameterProvider implements ParameterProvider {
 
     @Override
     String getParameter(String name) {
-        parameters[name]
+        if(parameters[name] instanceof String) return parameters[name]
+        if(parameters[name] instanceof String[]) return parameters[name][0]
+        null
     }
 
     @Override
     UploadedFile getFile(String name) {
+        if(!parameters.containsKey(name)) return null
         new MultipartFileWrapper(parameters[name] as MultipartFile)
     }
 
     @Override
-    Collection<String> getKeys() {
-        parameters.keySet()
+    Collection<String> getParameterNames() {
+        return parameters.keySet()
+    }
+
+    @Override
+    String[] getParameterValues(String name) {
+        if(parameters[name] instanceof String) return [parameters[name]]
+        if(parameters[name] instanceof String[]) return (String[])parameters[name]
+        new String[0]
     }
 }

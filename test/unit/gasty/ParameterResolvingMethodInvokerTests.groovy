@@ -147,8 +147,13 @@ class ParameterResolvingMethodInvokerTests extends GrailsUnitTestCase{
         }
 
         @Override
-        Collection<String> getKeys() {
+        Collection<String> getParameterNames() {
             map.keySet()
+        }
+
+        @Override
+        String[] getParameterValues(String name) {
+            return new String[0]
         }
     }
 

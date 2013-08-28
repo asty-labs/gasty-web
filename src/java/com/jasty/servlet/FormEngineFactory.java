@@ -2,8 +2,8 @@ package com.jasty.servlet;
 
 import com.jasty.core.*;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public abstract class FormEngineFactory {
 
@@ -17,5 +17,5 @@ public abstract class FormEngineFactory {
         return instance;
     }
 
-    public abstract FormEngine getFormEngine(ServletRequest request, ServletResponse response);
+    public abstract FormEngine getFormEngine(HttpServletRequest request, HttpServletResponse response);
 }

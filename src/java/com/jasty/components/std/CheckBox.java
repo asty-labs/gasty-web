@@ -24,7 +24,7 @@ public class CheckBox extends Component {
 
     @Override
     public void restore(ParameterProvider parameterProvider) {
-        checked = parameterProvider.getKeys().contains(getId()) && "1".equals(parameterProvider.getParameter(getId()));
+        checked = parameterProvider.getParameterNames().contains(getId()) && "1".equals(parameterProvider.getParameter(getId()));
     }
 
     @Override

@@ -12,7 +12,7 @@ public class FileUpload extends Component {
 
     @Override
     public void restore(ParameterProvider parameterProvider) {
-        if(parameterProvider.getKeys().contains(getId()))
+        if(parameterProvider.getParameterNames().contains(getId()))
             file = parameterProvider.getFile(getId());
     }
 
