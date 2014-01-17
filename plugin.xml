@@ -18,8 +18,10 @@
     <resource>gasty.GrailsFormEngineFactory</resource>
     <resource>gasty.GspViewRenderer</resource>
     <resource>gasty.MultipartFileWrapper</resource>
+    <resource>gasty.ParameterResolvingMethodInvoker</resource>
     <resource>gasty.RenderingHelper</resource>
     <resource>gasty.RequestParameterProvider</resource>
+    <resource>gasty.ServiceUtils</resource>
   </resources>
   <repositories>
     <repository name='grailsCentral' url='http://grails.org/plugins' />

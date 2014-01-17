@@ -2,9 +2,8 @@ package gasty
 
 import com.jasty.core.ViewRenderer
 import com.jasty.core.Form
-import org.springframework.web.servlet.mvc.Controller
-import com.jasty.core.RenderingContext
 import org.codehaus.groovy.grails.web.pages.GroovyPagesTemplateEngine
+import com.jasty.js.JsContext
 /**
  * Created with IntelliJ IDEA.
  * User: stas
@@ -40,7 +39,14 @@ class GspViewRenderer implements ViewRenderer {
 
         // Process the gsp with the given model and write to the StringWriter
         if(model == null) model = [:]
-        tmpl.make(model + [currentForm: form]).writeTo(out);
+        model = model + [currentForm: form]
+        JsContext.execute(new Runnable() {
+
+            @Override
+            void run() {
+                tmpl.make(model).writeTo(out);
+            }
+        })
 
         return out.toString()
     }

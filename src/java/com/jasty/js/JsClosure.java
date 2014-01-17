@@ -54,6 +54,6 @@ public class JsClosure implements JsExpression {
 	}
 
     public String encodeOnLoadAsHtml() {
-        return "<script>jQuery(" + encode() + ")</script>";
+        return "<script> jQuery(" + encode().replaceAll("</script>", "</scr\"+\"ipt>") + ") </script>";
     }
 }

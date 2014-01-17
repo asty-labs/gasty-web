@@ -27,4 +27,9 @@ class StandardTagLib {
     def id = {attrs ->
         currentForm.generateClientId((String)attrs.id)
     }
+
+    def resource = { attrs ->
+        attrs.dir = pluginContextPath + "/" + attrs.dir
+        out << g.resource(attrs)
+    }
 }
