@@ -12,8 +12,14 @@ var $$ = function(id) {
 var jasty = {
 
 	raiseEvent: function(self, eventHandler, eventArgs, opts) {
-		var form = self.parents("form")[0];
-		jasty.Form.raiseEvent($(form), eventHandler, eventArgs, opts);
+		var form = self.closest("form");
+        if(eventHandler.indexOf(":") >= 0) {
+            var clientHandler = eventHandler.substring(eventHandler.indexOf(":") + 1, eventHandler.length);
+            var parameter = eventHandler.substring(0, eventHandler.indexOf(":"));
+            if(!jasty.Form[clientHandler]) throw "No form handler: " + clientHandler;
+            jasty.Form[clientHandler](self, form, parameter, eventArgs, opts);
+        } else
+		    jasty.Form.raiseEvent(form, eventHandler, eventArgs, opts);
 	},
 
 	extend: function(baseClass, extension) {
