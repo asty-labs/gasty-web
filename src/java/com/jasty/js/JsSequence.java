@@ -29,7 +29,7 @@ public class JsSequence implements JsExpression {
 		StringBuilder builder = new StringBuilder();
 		for(JsExpression expr : expressions) {
 			builder.append(expr.encode());
-			builder.append(";");
+			builder.append(";\n");
 		}
 		return builder.toString();
 	}

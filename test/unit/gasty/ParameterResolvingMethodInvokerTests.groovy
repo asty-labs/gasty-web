@@ -18,7 +18,7 @@ import com.jasty.core.FormEngine
 class ParameterResolvingMethodInvokerTests extends GrailsUnitTestCase{
 
     void testNotFound() {
-        def invoker = new ParameterResolvingMethodInvoker()
+        def invoker = new ParameterResolvingMethodInvoker(null)
         def form = new TestForm()
         try {
             invoker.invoke(form, new TestParameterProvider(map: [
@@ -32,7 +32,7 @@ class ParameterResolvingMethodInvokerTests extends GrailsUnitTestCase{
     }
 
     void testMethod1() {
-        def invoker = new ParameterResolvingMethodInvoker()
+        def invoker = new ParameterResolvingMethodInvoker(null)
         def form = new TestForm()
         invoker.invoke(form, new TestParameterProvider(map: [
                 eventHandler: "method1"
@@ -41,7 +41,7 @@ class ParameterResolvingMethodInvokerTests extends GrailsUnitTestCase{
     }
 
     void testMethod2() {
-        def invoker = new ParameterResolvingMethodInvoker()
+        def invoker = new ParameterResolvingMethodInvoker(null)
         def parameterProvider = new TestParameterProvider(map: [
                 eventHandler: "method2",
                 "myform.text": "test text",
@@ -63,7 +63,7 @@ class ParameterResolvingMethodInvokerTests extends GrailsUnitTestCase{
     }
 
     void testMethod3() {
-        def invoker = new ParameterResolvingMethodInvoker()
+        def invoker = new ParameterResolvingMethodInvoker(null)
         def parameterProvider = new TestParameterProvider(map: [
                 eventHandler: "method3",
                 "myform.text": "test text",
@@ -83,7 +83,7 @@ class ParameterResolvingMethodInvokerTests extends GrailsUnitTestCase{
     }
 
     void testException() {
-        def invoker = new ParameterResolvingMethodInvoker()
+        def invoker = new ParameterResolvingMethodInvoker(null)
         def form = new TestForm(id: "myform")
         try {
             invoker.invoke(form, new TestParameterProvider(map: [

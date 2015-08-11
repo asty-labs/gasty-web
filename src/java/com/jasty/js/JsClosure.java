@@ -49,7 +49,7 @@ public class JsClosure implements JsExpression {
 				hasFirst = true;
 			builder.append(var.encode());
 		}
-		builder.append("){").append(body.encode()).append("}");
+		builder.append("){\n").append(body.encode()).append("}");
 		return builder.toString();
 	}
 

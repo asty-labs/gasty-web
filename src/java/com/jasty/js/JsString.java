@@ -17,6 +17,6 @@ public class JsString implements JsExpression {
 	
 	@Override
 	public String encode() {
-		return "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n") + "\"";
+		return "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "\\r") + "\"";
 	}
 }

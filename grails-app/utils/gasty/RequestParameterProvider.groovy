@@ -1,7 +1,7 @@
 package gasty
 
 import com.jasty.core.ParameterProvider
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
+import org.codehaus.groovy.grails.web.util.TypeConvertingMap
 import org.springframework.web.multipart.MultipartFile
 import com.jasty.core.UploadedFile
 
@@ -14,9 +14,9 @@ import com.jasty.core.UploadedFile
  */
 class RequestParameterProvider implements ParameterProvider {
 
-    GrailsParameterMap parameters
+	TypeConvertingMap parameters
 
-    RequestParameterProvider(GrailsParameterMap parameters) {
+    RequestParameterProvider(TypeConvertingMap parameters) {
         this.parameters = parameters
     }
 

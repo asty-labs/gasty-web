@@ -1,6 +1,7 @@
 package gasty
 
 import com.jasty.core.Component
+import com.jasty.core.Form
 import com.jasty.core.RenderingContext
 import com.jasty.core.ComponentRenderingHelper
 
@@ -13,16 +14,20 @@ import com.jasty.core.ComponentRenderingHelper
  */
 class RenderingHelper {
 
-    static <T extends Component> void render(Class<T> clazz, Writer out, attrs, boolean voidTag) {
+    static <T extends Component> void render(Class<T> clazz, Writer out, Map attrs, boolean voidTag) {
         render(clazz, out, attrs, null, voidTag)
     }
 
-    static <T extends Component> void render(Class<T> clazz, Writer out, attrs, Closure body) {
+    static <T extends Component> void render(Class<T> clazz, Writer out, Map attrs, Closure body) {
         render(clazz, out, attrs, body, false)
     }
 
-    static <T extends Component> void render(Class<T> clazz, Writer out, attrs, Closure body, boolean voidTag) {
+    static <T extends Component> void render(Class<T> clazz, Writer out, Map attrs, Closure body, boolean voidTag) {
         def component = clazz.newInstance()
+		if(attrs.containsKey("class")) {
+			attrs["clazz"] = attrs["class"]
+			attrs.remove("class")
+		}
         copy(component, attrs)
         RenderingContext.getInstance().registerComponent(component)
         if(voidTag) {
@@ -65,4 +70,20 @@ class RenderingHelper {
         }
         value
     }
+
+	static Form getCurrentForm() {
+		RenderingContext.getInstance()?.componentRegistry as Form
+	}
+
+	static String globalId(String value) {
+		def form = currentForm
+		if(!form) return value
+		form.generateClientId(value)
+	}
+
+	static String globalName(String value) {
+		def form = currentForm
+		if(!form) return value
+		form.globalizeId(value)
+	}
 }

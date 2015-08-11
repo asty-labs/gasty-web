@@ -134,7 +134,9 @@ public class FormEngine {
     }
 
     private void executeMethod() {
-        final Form form = formPersister.lookup(getParameterProvider().getParameter("state"));
+        String state = getParameterProvider().getParameter("state");
+        if(state == null) return;
+        final Form form = formPersister.lookup(state);
         form.setFormEngine(this);
         methodInvoker.invoke(form, parameterProvider);
         updateForm(form);

@@ -30,7 +30,7 @@ class GspViewRenderer implements ViewRenderer {
         if(fragmentName.startsWith("_"))
             viewPath += fragmentName
         else
-            viewPath += form.class.simpleName + (fragmentName ? "_" + fragmentName : "")
+            viewPath += form.mainViewName + (fragmentName ? "_" + fragmentName : "")
 
         def tmpl = groovyPagesTemplateEngine.createTemplate(viewPath.replace(".", "/") + ".gsp");
 

@@ -1,12 +1,7 @@
 package gasty.std
 
+import com.jasty.components.std.*
 import gasty.RenderingHelper
-import com.jasty.components.std.Button
-import com.jasty.components.std.Link
-import com.jasty.components.std.TextBox
-import com.jasty.components.std.ComboBox
-import com.jasty.components.std.CheckBox
-import com.jasty.components.std.FileUpload
 
 class StdTagLib {
 
@@ -16,19 +11,49 @@ class StdTagLib {
         RenderingHelper.render(Button, out, attrs, false)
     }
 
+	/**
+	 * @attr text
+	 * @attr onClick
+	 * @attr confirmText
+	 * @attr confirmTitle
+	 */
     def link = { attrs, body ->
         RenderingHelper.render(Link, out, attrs, body, false)
     }
 
+	/**
+	 *	@attr id
+	 *	@attr value
+	 *	@attr placeholder
+	 *	@attr disabled
+	 *	@attr visible
+	 *	@attr value
+	 *	@attr rows
+	 *	@attr cols
+	 *	@attr password
+	 *
+	 */
     def textBox = { attrs ->
         RenderingHelper.render(TextBox, out, attrs, !attrs.rows)
     }
 
+	def date = { attrs ->
+		RenderingHelper.render(DateField, out, attrs, false)
+	}
+
+	/**
+	 *	@attr id
+	 *	@attr options REQUIRED
+	 *  @attr value
+	 *  @attr onChange
+	 *
+	 */
     def comboBox = { attrs ->
         RenderingHelper.render(ComboBox, out, attrs, null, false)
     }
 
     def checkBox = { attrs ->
+		if(attrs.checked == null) attrs.checked = false
         RenderingHelper.render(CheckBox, out, attrs, true)
     }
 

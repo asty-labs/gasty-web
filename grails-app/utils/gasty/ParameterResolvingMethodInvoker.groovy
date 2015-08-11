@@ -4,6 +4,9 @@ import com.jasty.core.MethodInvoker
 import com.jasty.core.Form
 import com.jasty.core.ParameterProvider
 import com.jasty.core.EventArgs
+import com.jasty.core.UploadedFile
+import org.codehaus.groovy.grails.commons.GrailsApplication
+
 import java.lang.reflect.InvocationTargetException
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer
 import com.jasty.core.ComponentProxy
@@ -11,12 +14,22 @@ import com.jasty.core.ComponentProxy
 class ParameterResolvingMethodInvoker implements MethodInvoker {
 
     private static final String EVENT_PREFIX = "EVT.";
+	GrailsApplication grailsApplication
+
+	ParameterResolvingMethodInvoker(GrailsApplication grailsApplication) {
+		this.grailsApplication = grailsApplication
+	}
 
     @Override
     void invoke(Form form, ParameterProvider parameterProvider) {
 
         def eventHandler = parameterProvider.getParameter("eventHandler");
-        def method = form.getClass().methods.find { it.name == eventHandler }
+        def method
+		Class checkClass = form.getClass()
+		while (checkClass && !method) {
+			method = checkClass.declaredMethods.find { it.name == eventHandler }
+			checkClass = checkClass.superclass
+		}
         if(!method) throw new NoSuchMethodException(eventHandler)
         def paramNames = new LocalVariableTableParameterNameDiscoverer().getParameterNames(method)
         def paramTypes = method.parameterTypes
@@ -44,22 +57,26 @@ class ParameterResolvingMethodInvoker implements MethodInvoker {
         }
         if(ComponentProxy.isAssignableFrom(type)) return form.$$(type, name)
         def value = parameterProvider.getParameter(form.globalizeId(name))
-        if(value == null) return null
+		if(type == UploadedFile) return parameterProvider.getFile(form.globalizeId(name))
         parseValue(type, value)
     }
 
     protected Object parseValue(Class type, String value) {
-        if(type == long) return value as long
-        if(type == int) return value as int
+        if(type == long) return (value ?: 0) as long
+		if(type == Long) return (value ? value as long: null)
+        if(type == int) return (value ?:0) as int
+	    if(type == boolean) return ((value ?:0) as int) > 0
+	    if(value == null) return null
         if(type == String) return value
-        if(ServiceUtils.grailsApplication.isDomainClass(type)) return type.get(value as long)
-        throw new RuntimeException("cannot resolve value for the parameter ${name} of type ${type.name}")
+		if(type.isEnum()) return Enum.valueOf(type, value)
+        if(grailsApplication.isDomainClass(type)) return type.get(value as long)
+        throw new RuntimeException("cannot resolve value for the parameter of type ${type.name}")
     }
 
     private static EventArgs extractEventArgs(Form form, ParameterProvider parameterProvider) {
 
         def args = new EventArgs()
-        for(def key : parameterProvider.keys) {
+        for(def key : parameterProvider.parameterNames) {
             if(key.startsWith(EVENT_PREFIX)) {
                 def value = parameterProvider.getParameter(key)
                 key = key.substring(EVENT_PREFIX.length())

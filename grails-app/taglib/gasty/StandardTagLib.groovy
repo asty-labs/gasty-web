@@ -13,7 +13,7 @@ class StandardTagLib {
     def formViewer = { attrs ->
 
         FormEngine formEngine = GrailsFormEngineFactory.instance.getFormEngine(params, groovyPagesTemplateEngine)
-        def form = FormEngine.createInitialForm(attrs.entryPoint, attrs.parameters)
+        def form = attrs.form ?:FormEngine.createInitialForm(attrs.entryPoint, attrs.parameters)
         form.setId(attrs.id);
         def htmlFragment = formEngine.renderMainView(form);
         out << htmlFragment.getHtml()

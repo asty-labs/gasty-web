@@ -76,7 +76,7 @@ public abstract class ComponentProxy implements Serializable {
         if(getId() == null && query == null) return;
         ArrayList<Object> p = new ArrayList<Object>();
         Collections.addAll(p, params);
-        String selector = getId() == null ? "$('" + query + "').": "$$('" + getClientId() + "').";
+        String selector = getId() == null ? "jQ('" + query + "').": "jQi('" + getClientId() + "').";
         JsContext.add(new JsCall(selector + getFamily(), getClassName(), method, p));
     }
 
@@ -95,6 +95,10 @@ public abstract class ComponentProxy implements Serializable {
     public void removeClass(String value, int duration) {
         invoke("removeClass", value, duration);
     }
+
+    public void toggleClass(String value, boolean set) { invoke("toggleClass", value, set); }
+
+    public void data(String name, String value) { invoke("data", name, value); }
 
     public void remove() {
         invoke("remove");

@@ -14,12 +14,12 @@ import java.util.List;
  */
 public class RenderingContext {
 
-    private Form form;
+    private ComponentRegistry componentRegistry;
     private List<Component> components = new ArrayList<Component>();
 	private static ThreadLocal<RenderingContext> registries = new ThreadLocal<RenderingContext>();
 
-    public RenderingContext(Form form) {
-        this.form = form;
+    public RenderingContext(ComponentRegistry componentRegistry) {
+        this.componentRegistry = componentRegistry;
     }
 
     /**
@@ -44,9 +44,7 @@ public class RenderingContext {
      * @return rendering context
      */
 	public static RenderingContext getInstance() {
-		RenderingContext reg = registries.get();
-		if(reg == null) throw new RuntimeException("RenderingContext not set!");
-		return reg;
+		return registries.get();
 	}
 
     /**
@@ -55,11 +53,15 @@ public class RenderingContext {
      * @param component
      */
     public void registerComponent(Component component) {
-        form.registerComponent(component);
+        componentRegistry.registerComponent(component);
         components.add(component);
     }
 
     public Collection<Component> getComponents() {
         return components;
+    }
+
+    public ComponentRegistry getComponentRegistry() {
+        return componentRegistry;
     }
 }

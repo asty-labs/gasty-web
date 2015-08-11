@@ -1,6 +1,7 @@
 package com.jasty.servlet;
 
 import com.jasty.js.JsExpression;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -48,7 +49,7 @@ public abstract class FormEngineServlet extends HttpServlet {
         String script = expr.encode();
         PrintWriter writer = resp.getWriter();
 
-        if(req.getContentType().startsWith("multipart/form-data")) {
+        if(req.getContentType() != null && req.getContentType().startsWith("multipart/form-data")) {
             // to avoid displaying download dialog put script in html-tag.
             // see jquery.form.js docs
 
@@ -63,7 +64,7 @@ public abstract class FormEngineServlet extends HttpServlet {
             }
             else {
                 writer.write("<textarea>");
-                writer.write(script);
+                writer.write(StringEscapeUtils.escapeHtml(script));
                 writer.write("</textarea>");
             }
         }

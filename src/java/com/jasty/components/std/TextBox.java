@@ -18,14 +18,28 @@ public class TextBox extends Component {
     @InitProperty
 	private String value;
 
+    @SuppressWarnings("unused")
     @InitProperty
+    private String onChange;
+
+    @InitProperty
+    @SuppressWarnings("unused")
+    private String placeholder;
+
+    @InitProperty
+    @SuppressWarnings("unused")
     private int maxLength;
 
     @InitProperty
     private int rows;
 
     @InitProperty
+    @SuppressWarnings("unused")
     private int cols;
+
+	@InitProperty
+    @SuppressWarnings("unused")
+	private boolean disabled;
 
     private boolean password;
 

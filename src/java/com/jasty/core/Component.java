@@ -19,6 +19,8 @@ import com.jasty.utils.ReflectionUtils;
  */
 public abstract class Component extends ComponentProxy implements JsSerializable {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Custom data, associated with the component instance
      */
@@ -27,6 +29,9 @@ public abstract class Component extends ComponentProxy implements JsSerializable
 
     @InitProperty
     private String clazz;
+
+    @InitProperty
+    private String style;
 
     @InitProperty
     private String title;
@@ -42,6 +47,10 @@ public abstract class Component extends ComponentProxy implements JsSerializable
         this.clazz = clazz;
     }
 
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -55,6 +64,8 @@ public abstract class Component extends ComponentProxy implements JsSerializable
         attributes.put("id", getClientId());
         if(clazz != null)
             attributes.put("class", clazz);
+        if(style != null)
+            attributes.put("style", style);
         fillHtmlAttributes(attributes);
         return attributes;
     }

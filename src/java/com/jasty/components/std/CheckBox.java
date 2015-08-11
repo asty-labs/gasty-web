@@ -22,6 +22,9 @@ public class CheckBox extends Component {
     @InitProperty
     private String onChange;
 
+    @InitProperty
+    private boolean disabled;
+
     @Override
     public void restore(ParameterProvider parameterProvider) {
         checked = parameterProvider.getParameterNames().contains(getId()) && "1".equals(parameterProvider.getParameter(getId()));
@@ -39,6 +42,15 @@ public class CheckBox extends Component {
     public void setChecked(boolean checked) {
         this.checked = checked;
         invoke("checked", checked);
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean value) {
+        this.disabled = value;
+        invoke("disabled", disabled);
     }
 
     @Override

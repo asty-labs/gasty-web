@@ -18,6 +18,12 @@ public class Link extends Component {
 	@SuppressWarnings("unused")
     @InitProperty
 	private String onClick;
+	@SuppressWarnings("unused")
+	@InitProperty
+	String confirmTitle;
+	@SuppressWarnings("unused")
+	@InitProperty
+	String confirmText;
 
 	public void setText(String text) {
 		this.text = text;

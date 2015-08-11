@@ -14,10 +14,12 @@ import com.jasty.js.JsSerializable;
 public class Option implements JsSerializable {
     private String value;
     private String text;
+    private String clazz;
 
     public Option(String value, String text) {
         this.value = value;
         this.text = text;
+        this.clazz = null;
     }
     
     public String getValue() {
@@ -36,8 +38,16 @@ public class Option implements JsSerializable {
         this.text = text;
     }
 
+    public String getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(String clazz) {
+        this.clazz = clazz;
+    }
+
     @Override
     public JsExpression toJsExpression() {
-        return JsList.from(value, text);
+        return JsList.from(value, text, clazz);
     }
 }

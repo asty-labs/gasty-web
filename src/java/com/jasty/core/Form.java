@@ -15,7 +15,9 @@ import java.util.Map;
  * @version 1.0
  *
  */
-public abstract class Form extends Component {
+public abstract class Form extends Component implements ComponentRegistry {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * When a component gets registered in Form and has no id, Form assigns it a generated one.
@@ -62,7 +64,7 @@ public abstract class Form extends Component {
     public String globalizeId(String initialId) {
         if(initialId == null)
             initialId = "c" + lastAssignedChildId++;
-        return getClientId() + "." + initialId;
+        return getId() + "." + initialId;
     }
 
     public String generateClientId(String id) {
@@ -117,13 +119,6 @@ public abstract class Form extends Component {
         }
     }
 
-    /**
-     * This method can be used in the event handlers of the Form to get request parameters.
-     *
-     * @param name  local parameter name
-     * @return      value of the parameter
-     *
-     */
     protected ParameterProvider getParameters() {
         return new FormLocalParameterProvider();
     }
@@ -234,5 +229,9 @@ public abstract class Form extends Component {
 
     protected void setDisposed(boolean value) {
         disposed = value;
+    }
+
+    public String getMainViewName() {
+        return this.getClass().getSimpleName();
     }
 }
