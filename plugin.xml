@@ -45,10 +45,10 @@
       <plugin group='org.grails.plugins' name='cache' version='1.0.1' />
     </compile>
     <runtime>
-      <plugin group='org.grails.plugins' name='crypto' version='2.0' />
-      <plugin group='org.grails.plugins' name='resources' version='1.1.6' />
       <plugin group='org.grails.plugins' name='mail' version='1.0.1' />
       <plugin group='org.grails.plugins' name='hibernate' version='2.1.2' />
+      <plugin group='org.grails.plugins' name='crypto' version='2.0' />
+      <plugin group='org.grails.plugins' name='resources' version='1.1.6' />
     </runtime>
     <build>
       <plugin group='org.grails.plugins' name='tomcat' version='2.1.2' />
