@@ -30,11 +30,15 @@
     <repository name='http://snapshots.repository.codehaus.org' url='http://snapshots.repository.codehaus.org/' />
     <repository name='http://repository.codehaus.org' url='http://repository.codehaus.org/' />
     <repository name='http://download.java.net/maven/2/' url='http://download.java.net/maven/2/' />
+    <repository name='http://repository.jboss.com/maven2/' url='http://repository.jboss.com/maven2/' />
+    <repository name='http://repo.grails.org/grails/simple/plugins-releases-local/' url='http://repo.grails.org/grails/simple/plugins-releases-local/' />
   </repositories>
   <dependencies>
     <compile>
-      <dependency group='com.google.zxing' name='core' version='3.2.0' />
+      <dependency group='org.apache.httpcomponents' name='httpcore' version='4.1.2' />
+      <dependency group='org.apache.httpcomponents' name='httpclient' version='4.1.2' />
       <dependency group='ar.com.hjg' name='pngj' version='2.1.0' />
+      <dependency group='com.google.zxing' name='core' version='3.2.0' />
     </compile>
     <runtime>
       <dependency group='postgresql' name='postgresql' version='9.2-1002.jdbc4' />
@@ -43,12 +47,13 @@
   <plugins>
     <compile>
       <plugin group='org.grails.plugins' name='cache' version='1.0.1' />
+      <plugin group='org.grails.plugins' name='quartz' version='0.4.2' />
     </compile>
     <runtime>
       <plugin group='org.grails.plugins' name='mail' version='1.0.1' />
-      <plugin group='org.grails.plugins' name='resources' version='1.1.6' />
       <plugin group='org.grails.plugins' name='crypto' version='2.0' />
       <plugin group='org.grails.plugins' name='hibernate' version='2.1.2' />
+      <plugin group='org.grails.plugins' name='resources' version='1.1.6' />
     </runtime>
     <build>
       <plugin group='org.grails.plugins' name='tomcat' version='2.1.2' />
