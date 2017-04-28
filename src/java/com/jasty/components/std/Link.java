@@ -34,6 +34,14 @@ public class Link extends Component {
         onClick = value;
     }
 
+    public void setConfirmTitle(String value) {
+        confirmTitle = value;
+    }
+
+    public void setConfirmText(String value) {
+        confirmText = value;
+    }
+
     @Override
     public String getHtmlTag() {
         return "a";

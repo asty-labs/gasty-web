@@ -28,6 +28,9 @@ public abstract class Component extends ComponentProxy implements JsSerializable
     private String data;
 
     @InitProperty
+    private String data2;
+
+    @InitProperty
     private String clazz;
 
     @InitProperty
@@ -41,6 +44,10 @@ public abstract class Component extends ComponentProxy implements JsSerializable
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public void setData2(String data2) {
+        this.data2 = data2;
     }
 
     public void setClazz(String clazz) {

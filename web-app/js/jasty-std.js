@@ -15,7 +15,7 @@
             self.text(opts.text);
             self.click(function () {
                 var op = function() {
-                    jasty.raiseEvent(self, opts.onClick, {srcId: self.attr("id"), data: opts.data});
+                    jasty.raiseEvent(self, opts.onClick, {srcId: self.attr("id"), data: opts.data, data2: opts.data2});
                 };
 
 	            if(opts.confirmText) {
